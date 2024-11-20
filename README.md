@@ -1,6 +1,9 @@
-# NBA Statistical Performance Feedback
+# NBA
 
-# Overview
+![Alt text](download.jpg)
+
+NBA Performance Feedback Model
+In this project we will collaboratively provide feedback based on individual game statistics analyze using advanced Machine Learning methodologies to find how individuals perform in the NBA. Our statistics will incorporate transformer models, natural language processing (NLP) techniques, and other tools acquired throughout the course, in addition to at least one new technology SQL that we haven’t covered together.
 
 # References
 
