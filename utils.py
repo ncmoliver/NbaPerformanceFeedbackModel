@@ -1,10 +1,17 @@
 # utils.py
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from dotenv import load_dotenv
 import os
+import numpy as np
 
 load_dotenv()
+
+
+def reduce_positions(df):
+    # Split each entry in the 'Pos' column by '-' and take the first part
+    df['Pos'] = df['Pos'].str.split('-').str[0]
+    return df
 
 
 def reformat_columns(df):
@@ -29,36 +36,48 @@ def combine_dataframes(list_of_dataframes):
 
 # Create a function to encode categorical columns
 def encode_categorical_columns(df):
+
     ## Encode the `Season_type` columns, 0 for Regular Season games and 1 for Playoff games
     df['season_type_encoded'] = df['Season_type'].apply(lambda x: 0 if x == 'Regular Season' else 1)
+    
     # Initialize LabelEncoder for players and teams column
     player_encoder = LabelEncoder()
     team_encoder = LabelEncoder()
-    ## Use LabelEncoder to encode the `PLAYER` and `TEAM` columns
+    position_encoder = LabelEncoder()
+
+
+    ## Use LabelEncoder to encode the `PLAYER`, `TEAM`, `POSITION` columns
     df['player_encoded'] = player_encoder.fit_transform(df['PLAYER'])
     df['team_encoded'] = team_encoder.fit_transform(df['TEAM'])
+    df['position_encoded'] = position_encoder.fit_transform(df['Pos'])
     
     # Save mappings to decode later
     player_mapping = dict(zip(player_encoder.classes_, player_encoder.transform(player_encoder.classes_)))
     team_mapping = dict(zip(team_encoder.classes_, team_encoder.transform(team_encoder.classes_)))
-    
-    # Drop original player and team columns
-    df = df.drop(columns=['year','PLAYER', 'TEAM', 'Season_type' ,'RANK', 'PLAYER_ID', 'TEAM_ID'])
+    position_mapping = dict(zip(team_encoder.classes_, team_encoder.transform(team_encoder.classes_)))
+
+    # Drop original player, team, and position columns
+    df = df.drop(columns=['Pos', 'PLAYER', 'TEAM', 'PLAYER_ID', 'TEAM_ID', 'Season_type'])
     
     # Return the updated dataframe, player mappings, and  team mappings
-    return df, player_mapping, team_mapping
+    return df, player_mapping, team_mapping, position_mapping
 
 
-# Divides dataframe into single game stats by dividing each column by the gp
-def convert_to_single_game(df, gp_column='GP', exclude_columns=['FG_PCT', 'FG3_PCT', 'FT_PCT']):
-    # Loop through each column in the DataFrame
-    for column in df.columns:
-        # Skip the GP column and any columns in the exclude list
-        if column != gp_column and column not in exclude_columns:
-            # Divide each value in the column by the values in the gp_column
-            df[column] = round(df[column] / df[gp_column],1)
-    # Drop games played from dataframe
-    df = df.drop(columns='GP')
+def divide_by_games_played(df):
+    # Check if 'games_played' column exists in the DataFrame
+    if 'games_played' not in df.columns:
+        raise ValueError("The DataFrame does not contain a 'games_played' column.")
+    
+    # Divide each numerical column by the 'games_played' column
+    for col in df.select_dtypes(include=['float64', 'int64']).columns:
+        if col != 'games_played':  # Exclude 'games_played' from the division
+            with np.errstate(divide='ignore', invalid='ignore'):
+                df[col] = round(df[col] / df['games_played'],1)
+                # Replace any infinite or NaN values (from division by zero) with NaN
+                df[col] = df[col].replace([np.inf, -np.inf], np.nan)
+    
+    df = df.drop(columns=('games_played'))
+    
     return df
 
 
