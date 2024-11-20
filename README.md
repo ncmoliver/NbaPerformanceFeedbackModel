@@ -1,5 +1,6 @@
 # NBA
-In this project we will be refactoring code from an SMS text classification solution into a function that constructs a linear Support Vector Classification (SVC) model. The NBA Performance Feedback Model is created and trained, a Gradio app to host the application, enabling users to test text messages. NBA Performance Feedback Model will provide feedback to users, indicating whether the text is classified as spam or not, based on the model's performance.
+NBA Performance Feedback Model
+In this project we will collaboratively provide feedback based on individual game statistics analyze using advanced Machine Learning methodologies to find how individuals perform in the NBA. Our statistics will  incorporate transformer models, natural language processing (NLP) techniques, and other tools acquired throughout the course, in addition to at least one new technology SQL that we haven’t covered together.
 # References
 
 #### Datasets
