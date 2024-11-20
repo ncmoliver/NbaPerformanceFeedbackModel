@@ -1,20 +1,45 @@
 # utils.py
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-from dotenv import load_dotenv
-import os
 import numpy as np
 
-load_dotenv()
 
 
 def reduce_positions(df):
+    """
+    Function Name: reduce_positions
+
+    Description: This function takes in a dataframe and modifies the 'Pos' column by 
+    splitting each value on the '-' character, which returns the primary position only. 
+    After splitting, values that are too general (such as 'Forward' or 'Guard') are 
+    removed due to their lack of specificity.
+
+    Example: The value 'SF-SG' would be split to just 'SF'.
+
+    Parameters / Input: A DataFrame with a column 'Pos'.
+
+    Output: DataFrame with the 'Pos' column updated to contain only primary positions.
+    """
     # Split each entry in the 'Pos' column by '-' and take the first part
     df['Pos'] = df['Pos'].str.split('-').str[0]
     return df
 
 
 def reformat_columns(df):
+    """
+    Function Name: reformat_columns
+
+    Description: This function reformats certain columns in the DataFrame. It replaces 
+    any occurrences of '%20' with spaces and underscores with spaces in the 'Season_type' 
+    column, extracts the base year from the 'year' column by removing additional 
+    season information, and removes any columns with 'Unnamed' in the name.
+
+    Example: The value '2012-13' in the 'year' column would be reformatted to '2012'.
+
+    Parameters / Input: A DataFrame with columns 'Season_type' and 'year'.
+
+    Output: A cleaned DataFrame with reformatted columns.
+    """
     # Reformat the Season_type column to remove %20
     df['Season_type'] = df['Season_type'].str.replace('%20', ' ', regex=False).str.replace('_', ' ', regex=False)
     # Reformat the year column to use the base year `2012-13` to `2012`
@@ -25,7 +50,22 @@ def reformat_columns(df):
     # Return the clean dataframe
     return df
 
+
+# Create a function that reformats the dataframes and combines them into one dataframe
 def combine_dataframes(list_of_dataframes):
+    """
+    Function Name: combine_dataframes
+
+    Description: This function reformats and combines two DataFrames, one representing 
+    regular season data and the other representing playoff data. Each DataFrame is 
+    reformatted using the reformat_columns function and then combined vertically.
+
+    Example: Combines two DataFrames containing 'Regular Season' and 'Playoff' data.
+
+    Parameters / Input: A list of two DataFrames.
+
+    Output: A single combined DataFrame with reformatted columns.
+    """
     results = [reformat_columns(df) for df in list_of_dataframes]
     # Separate them back into individual sets
     regular_season_data = results[0]
@@ -34,9 +74,26 @@ def combine_dataframes(list_of_dataframes):
     combined_df = pd.concat([regular_season_data, playoff_data], axis=0, ignore_index=True)
     return combined_df
 
+
+
 # Create a function to encode categorical columns
 def encode_categorical_columns(df):
+    """
+    Function Name: encode_categorical_columns
 
+    Description: This function encodes categorical columns in the DataFrame, including 
+    season type, player, team, and position. The 'Season_type' column is encoded as 0 
+    for Regular Season and 1 for Playoffs, while the player, team, and position columns 
+    are label-encoded. Mappings for each encoding are saved for potential future decoding.
+
+    Example: 'Regular Season' in the 'Season_type' column is encoded as 0, and player 
+    names are encoded as integers.
+
+    Parameters / Input: A DataFrame with columns 'Season_type', 'PLAYER', 'TEAM', and 'Pos'.
+
+    Output: A tuple containing the updated DataFrame, along with dictionaries for 
+    player, team, and position encodings.
+    """
     ## Encode the `Season_type` columns, 0 for Regular Season games and 1 for Playoff games
     df['season_type_encoded'] = df['Season_type'].apply(lambda x: 0 if x == 'Regular Season' else 1)
     
@@ -44,7 +101,6 @@ def encode_categorical_columns(df):
     player_encoder = LabelEncoder()
     team_encoder = LabelEncoder()
     position_encoder = LabelEncoder()
-
 
     ## Use LabelEncoder to encode the `PLAYER`, `TEAM`, `POSITION` columns
     df['player_encoded'] = player_encoder.fit_transform(df['PLAYER'])
@@ -57,13 +113,32 @@ def encode_categorical_columns(df):
     position_mapping = dict(zip(team_encoder.classes_, team_encoder.transform(team_encoder.classes_)))
 
     # Drop original player, team, and position columns
-    df = df.drop(columns=['Pos', 'PLAYER', 'TEAM', 'PLAYER_ID', 'TEAM_ID', 'Season_type'])
+    df = df.drop(columns=['Pos', 'PLAYER', 'TEAM', 'PLAYER_ID', 'TEAM_ID', 'Season_type', 'AST_TOV', 'STL_TOV'])
     
     # Return the updated dataframe, player mappings, and  team mappings
     return df, player_mapping, team_mapping, position_mapping
 
 
+
+
 def divide_by_games_played(df):
+    """
+    Function Name: divide_by_games_played
+
+    Description: This function takes a DataFrame and divides each numerical column 
+    by the 'games_played' column to calculate per-game statistics. It uses error 
+    handling to avoid division by zero and replaces any infinite or NaN results with NaN. 
+    After calculations, the 'games_played' column is dropped from the DataFrame.
+
+    Example: Total points in the 'points' column are divided by 'games_played' to get 
+    points per game.
+
+    Parameters / Input: A DataFrame with a 'games_played' column and other numerical 
+    columns representing totals.
+
+    Output: A DataFrame with per-game statistics in place of totals.
+    """
+     
     # Check if 'games_played' column exists in the DataFrame
     if 'games_played' not in df.columns:
         raise ValueError("The DataFrame does not contain a 'games_played' column.")
@@ -79,76 +154,3 @@ def divide_by_games_played(df):
     df = df.drop(columns=('games_played'))
     
     return df
-
-
-def calculate_shooting_production(df):
-    two_made_weight = float(os.getenv('TWO_POINTS_MADE',1))
-    two_missed_weight = float(os.getenv('TWO_POINTS_MISSED',1))
-    three_made_weight = float(os.getenv('THREE_POINTS_MADE', 1))
-    three_missed_weight = float(os.getenv('THREE_POINTS_MISSED', 1))
-    
-
-    # Calculate missed shots
-    df['FGMI'] = df['FGA'] - df['FGM']
-    df['FG3MI'] = df['FG3A'] - df['FG3M']
-    df['FTMI'] = df['FTA'] - df['FTM']
-    
-    # Calculate two, three, and ft production
-    df['two_production'] = (df['FGM'] * two_made_weight) - (df['FGMI'] * two_missed_weight)
-    df['three_production'] = (df['FG3M'] * three_made_weight) - (df['FG3MI'] * three_missed_weight)
-    df['ft_production'] = df['FTM'] - df['FTMI']
-    
-    df['total_shooting_production'] = df['two_production'] + df['three_production'] + df['ft_production']
-    return df
-
-
-def calculate_offensive_anx(df):
-    # Retrieve and convert weights from environment variables
-    or_weight = float(os.getenv('OFF_REBOUND', 0))
-    ast_weight = float(os.getenv('AST', 0))
-    to_weight = float(os.getenv('TO', 0))
-    
-    # Ensure numeric data in relevant columns
-    df['OREB'] = pd.to_numeric(df['OREB'], errors='coerce')
-    df['AST'] = pd.to_numeric(df['AST'], errors='coerce')
-    df['TOV'] = pd.to_numeric(df['TOV'], errors='coerce')
-
-    # Calculate weighted values
-    df['weighted_or'] = df['OREB'] * or_weight
-    df['weighted_ast'] = df['AST'] * ast_weight
-    df['weighted_to'] = df['TOV'] * (to_weight)
-    
-    # Calculate Total Offensive Anx
-    df['total_offensive_anx'] = df['weighted_or'] + df['weighted_ast'] + df['weighted_to'] 
-    return df
-
-
-
-def calculate_defensive_anx(df):
-    # Retrieve and convert weights from environment variables
-    dreb_weight = float(os.getenv('DEF_REBOUND', 0))
-    stl_weight = float(os.getenv('STL', 0))
-    blk_weight = float(os.getenv('BLK', 0))
-    pf_weight = float(os.getenv('PF', 0))
-    
-    # Ensure numeric data in relevant columns
-    df['DREB'] = pd.to_numeric(df['DREB'], errors='coerce')
-    df['STL'] = pd.to_numeric(df['STL'], errors='coerce')
-    df['BLK'] = pd.to_numeric(df['BLK'], errors='coerce')
-    df['PF'] = pd.to_numeric(df['PF'], errors='coerce')
-
-    # Calculate weighted values
-    df['weighted_dr'] = df['DREB'] * dreb_weight
-    df['weighted_stl'] = df['STL'] * stl_weight
-    df['weighted_blk'] = df['BLK'] * blk_weight
-    df['weighted_pf'] = df['PF'] * pf_weight
-    
-    # Calculate Total Defensive Anx
-    df['total_defensive_anx'] = df['weighted_dr'] + df['weighted_stl'] + df['weighted_blk'] + df['weighted_pf']
-    return df
-
-# Calculate Total Production
-def calculate_total_player_production(df):
-    df['total_production'] = df['total_shooting_production'] + df['total_offensive_anx'] + df['total_defensive_anx']
-    return df
-
