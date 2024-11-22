@@ -2,7 +2,8 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import numpy as np
-
+from transformers import LlamaTokenizer, LlamaForCausalLM
+import sqlite3
 
 
 def reduce_positions(df):
@@ -154,3 +155,46 @@ def divide_by_games_played(df):
     df = df.drop(columns=('games_played'))
     
     return df
+
+
+##############################################
+# Function for the database calls
+##############################################
+
+# Step 1: Connect to the SQLite database
+def connect_to_db(db_name):
+    conn = sqlite3.connect(db_name)
+    return conn
+
+# Step 2: Query the database
+def query_database(conn, user_query):
+    cursor = conn.cursor()
+    try:
+        cursor.execute(user_query)
+        results = cursor.fetchall()
+        return results
+    except sqlite3.Error as e:
+        return f"Database error: {e}"
+
+# Step 3: Format results for the model
+def format_results(results):
+    formatted_text = "Query Results:\n"
+    for row in results:
+        formatted_text += " | ".join(map(str, row)) + "\n"
+    return formatted_text
+
+# Step 4: Load the Llama model
+def load_llama_model(model_name, access_token):
+    tokenizer = LlamaTokenizer.from_pretrained(model_name)
+    model = LlamaForCausalLM.from_pretrained(model_name)
+    return tokenizer, model
+
+# Step 5: Generate response from the model
+access_token = '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'
+def query_llama_model(tokenizer, model, input_text):
+    inputs = tokenizer(input_text, return_tensors="pt")
+    outputs = model.generate(**inputs, max_new_tokens=200)
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    
+    return response
+
