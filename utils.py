@@ -190,7 +190,7 @@ def load_llama_model(model_name, access_token):
     return tokenizer, model
 
 # Step 5: Generate response from the model
-access_token = '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'
+access_token = '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'
 def query_llama_model(tokenizer, model, input_text):
     inputs = tokenizer(input_text, return_tensors="pt", truncation=True,max_length=2048)
     outputs = model.generate(**inputs, max_new_tokens=50)
