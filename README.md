@@ -1,4 +1,3 @@
-# 🏀 NBA Stats Query Model: Natural Language to SQL 🔥
 ![Alt text](download.jpg)
 # 🏀 NBA Stats Conversational AI: Natural Language to SQL and Back! 🚀
 
