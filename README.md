@@ -20,8 +20,13 @@ Key features include:
 - **Integration of New Technologies**: Incorporates SQL for database querying.
 
 ---
+### **References**
+- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
+- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
 
-## **Project Workflow**
+#### **Technologies**
+- [Llama LLM](https://github.com/) for natural language to SQL translation.
+- [Gradio](https://gradio.app/) for creating the interactive front-end.## **Project Workflow**
 
 ### **Gradio Front-End**
 1. **Input**: Users provide natural language queries.
@@ -51,14 +56,3 @@ Run the following command to install the dependencies:
 ```bash
 pip install gradio sqlalchemy transformers python-dotenv
 
----
-
-### **References**
-
-#### **Datasets**
-- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
-- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
-
-#### **Technologies**
-- [Llama LLM](https://github.com/) for natural language to SQL translation.
-- [Gradio](https://gradio.app/) for creating the interactive front-end.
