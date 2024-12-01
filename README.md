@@ -1,8 +1,9 @@
 ![Alt text](download.jpg)
-# 🏀 NBA Stats Conversational AI: Natural Language to SQL and Back! 🚀
+# 🏀 NBA Stats Conversational AI: Natural Language to SQL and Back!
 
 ## 🌟 Project Overview
-This project is designed to redefine how we interact with basketball statistics by using the power of Natural Language Processing (NLP) and SQL. Users can ask natural language questions about NBA stats, and the model will:
+This project is designed to redefine how we interact with basketball statistics by using the power of Natural Language Processing (NLP) and SQL. This project also incorporates a user-friendly Gradio front-end, allowing natural language queries to be seamlessly translated into SQL commands using Llama LLM, executed against a database, and returned as user-friendly results. 
+This model will:
 - Translate the question into an SQL query to pull data from a structured database.
 - Provide a natural language response with the results.
 
@@ -14,6 +15,17 @@ Whether you're a basketball analyst, an NBA enthusiast, or a curious data scient
 - Accept natural language questions about NBA statistics.
 - Convert questions into SQL queries to fetch relevant data.
 - Generate natural language responses to answer user queries intuitively.
+
+---
+
+## Key Features
+Advanced ML Analytics: Analyze player performance using state-of-the-art transformer models and NLP techniques.
+Dynamic Query Translation: Transform natural language queries into SQL commands with high accuracy using Llama LLM.
+Interactive Front-End: A Gradio-based interface for smooth interaction, data querying, and visualization.
+Comprehensive Dataset Integration:
+Kaggle Dataset: 1991–2021 NBA Stats
+Kaggle Dataset: NBA Stats Dataset for the Last 10 Years
+Exploration of New Technologies: Integration of SQL as a database querying tool not covered previously in the course.
 
 ---
 
@@ -39,6 +51,12 @@ This design ensures faster queries, better organization, and a user-friendly sch
 
 ---
 
+### **References**
+- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
+- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
+
+___
+
 ## 💡 How It Works
 ### **Input:**
 Users ask questions like:
@@ -53,7 +71,3 @@ FROM stats
 JOIN teams ON stats.TEAM_ID = teams.TEAM_ID 
 WHERE TEAM_NAME = 'Los Angeles Lakers' AND YEAR = 2020 
 ORDER BY POINTS DESC LIMIT 1;
-
-### **References**
-- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
-- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
