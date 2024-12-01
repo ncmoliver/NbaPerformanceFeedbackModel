@@ -51,6 +51,7 @@ Run the following command to install the dependencies:
 ```bash
 pip install gradio sqlalchemy transformers python-dotenv
 
+---
 
 ### **References**
 
