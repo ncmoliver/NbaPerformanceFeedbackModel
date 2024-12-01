@@ -51,18 +51,6 @@ Run the following command to install the dependencies:
 ```bash
 pip install gradio sqlalchemy transformers python-dotenv
 
-NBA-Performance-Feedback-Model/
-├── data/
-│   ├── nba_1991_2021.csv
-│   ├── nba_last_10_years.csv
-├── scripts/
-│   ├── data_preprocessing.py
-│   ├── model_training.py
-│   ├── gradio_interface.py
-├── .env
-├── app.py
-├── requirements.txt
-├── README.md
 
 ### **References**
 
