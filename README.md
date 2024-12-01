@@ -19,10 +19,10 @@ Whether you're a basketball analyst, an NBA enthusiast, or a curious data scient
 ---
 
 ## Key Features
--**Advanced ML Analytics**: Analyze player performance using state-of-the-art transformer models and NLP techniques.
--**Dynamic Query Translation**: Transform natural language queries into SQL commands with high accuracy using Llama LLM.
--**Interactive Front-End**: A Gradio-based interface for smooth interaction, data querying, and visualization.
--**Comprehensive Dataset Integration**:
+- **Advanced ML Analytics**: Analyze player performance using state-of-the-art transformer models and NLP techniques.
+- **Dynamic Query Translation**: Transform natural language queries into SQL commands with high accuracy using Llama LLM.
+- **Interactive Front-End**: A Gradio-based interface for smooth interaction, data querying, and visualization.
+- **Comprehensive Dataset Integration**:
 Kaggle Dataset: 1991–2021 NBA Stats
 Kaggle Dataset: NBA Stats Dataset for the Last 10 Years
 Exploration of New Technologies: Integration of SQL as a database querying tool not covered previously in the course.
