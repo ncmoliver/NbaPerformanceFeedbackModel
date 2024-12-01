@@ -50,3 +50,26 @@ Example query:
 Run the following command to install the dependencies:
 ```bash
 pip install gradio sqlalchemy transformers python-dotenv
+
+NBA-Performance-Feedback-Model/
+├── data/
+│   ├── nba_1991_2021.csv
+│   ├── nba_last_10_years.csv
+├── scripts/
+│   ├── data_preprocessing.py
+│   ├── model_training.py
+│   ├── gradio_interface.py
+├── .env
+├── app.py
+├── requirements.txt
+├── README.md
+
+### **References**
+
+#### **Datasets**
+- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
+- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
+
+#### **Technologies**
+- [Llama LLM](https://github.com/) for natural language to SQL translation.
+- [Gradio](https://gradio.app/) for creating the interactive front-end.
