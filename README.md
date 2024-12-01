@@ -53,3 +53,7 @@ FROM stats
 JOIN teams ON stats.TEAM_ID = teams.TEAM_ID 
 WHERE TEAM_NAME = 'Los Angeles Lakers' AND YEAR = 2020 
 ORDER BY POINTS DESC LIMIT 1;
+
+### **References**
+- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
+- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
