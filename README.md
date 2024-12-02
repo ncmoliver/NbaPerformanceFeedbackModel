@@ -165,8 +165,8 @@ Let’s transform basketball together! 🏀💡
 
 #### Contributors
 
-[Marques Oliver]  
+[Marques Oliver](https://github.com/ncmoliver)
 [Stacy Staton](https://github.com/stacjstaton)  
 [Rygo Foss](https://github.com/emersonfoss)  
 [Marquez Ward](https://github.com/mdward911)  
-[Dylan Reed]
+[Dylan Reed](https://github.com/rassnapple)
