@@ -89,7 +89,7 @@ FROM stats
 JOIN teams ON stats.TEAM_ID = teams.TEAM_ID
 WHERE TEAM_NAME = 'Los Angeles Lakers' AND YEAR = 2020
 ORDER BY POINTS DESC LIMIT 1;
-
+```
 
 ### Output:
 
@@ -99,53 +99,67 @@ ORDER BY POINTS DESC LIMIT 1;
 ### 🏗️ Project Components
 
 **Preprocessing Scripts**
-* Team name mapping and column renaming functions.
-* Database normalization and restructuring logic.
+
+- Team name mapping and column renaming functions.
+- Database normalization and restructuring logic.
 
 **Model:**
-* A pipeline that includes NLP, SQL query generation, and result parsing.
-* Trained on NBA data for natural language understanding and SQL optimization.
+
+- A pipeline that includes NLP, SQL query generation, and result parsing.
+- Trained on NBA data for natural language understanding and SQL optimization.
 
 **Database:**
-* Restructured and enriched with full context for team names and player stats.
+
+- Restructured and enriched with full context for team names and player stats.
 
 **User Interface**
-* A simple, intuitive interface for entering questions and receiving answers.
+
+- A simple, intuitive interface for entering questions and receiving answers.
 
 ## 📁 File Structurefold
+
 project/
 ├── data/
-│   ├── nba_stats.csv       # Original dataset
-│   ├── processed_db.sqlite # Final processed database
+│ ├── nba_stats.csv # Original dataset
+│ ├── processed_db.sqlite # Final processed database
 ├── scripts/
-│   ├── preprocess.py       # Data preprocessing functions
-│   ├── query_model.py      # SQL query generation and response logic
-├── main.ipynb              # Jupyter notebook for demonstration
-├── README.md               # Project README (this file!)
-└── requirements.txt        # Python dependencies
+│ ├── preprocess.py # Data preprocessing functions
+│ ├── query_model.py # SQL query generation and response logic
+├── main.ipynb # Jupyter notebook for demonstration
+├── README.md # Project README (this file!)
+└── requirements.txt # Python dependencies
 
 ## 🧑‍💻 How To Run
+
 1. Install Dependencies
-* `pip install -r requirements.txt`
+
+- `pip install -r requirements.txt`
 
 2. Run Jupyter Notebook
-* jupyter notebook main.ipynb
+
+- jupyter notebook main.ipynb
 
 3. Ask a Question
-* Input your question in the provided interface and get instant answer!
+
+- Input your question in the provided interface and get instant answer!
 
 ## Future Improvements
-* Advanced NLP: Improve question understanding for complex queries
-* Additional data and metrics: Include more advanced basketball statistics to cover all questions a user might ask.
-* Real-Time Data: Integrate live NBA data updates for current season stats.
+
+- Advanced NLP: Improve question understanding for complex queries
+- Additional data and metrics: Include more advanced basketball statistics to cover all questions a user might ask.
+- Real-Time Data: Integrate live NBA data updates for current season stats.
 
 ## 🎉 Conclusion
+
 This project redefines how we interact with NBA data, combining the power of AI, SQL, and natural language processing. Whether you're a die-hard fan or an analyst, this tool makes accessing basketball stats seamless and intuitive.
 
 Let’s transform basketball together! 🏀💡
 
 ### References
+
 - [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
 - [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
+
+```
 
 ```
