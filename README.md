@@ -40,7 +40,7 @@ To ensure the model operates effectively, the data underwent meticulous preproce
 
 # 🎯 Goal
 
-     The primary goal of this project is to:
+The primary goal of this project is to:
 
 Enable Natural Language Processing (NLP): Understand user queries and convert them into SQL.
 Deliver Human-Like Responses: Provide accurate and engaging natural language answers to user questions.
