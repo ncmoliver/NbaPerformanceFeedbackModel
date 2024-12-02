@@ -131,15 +131,15 @@ project/
 
 ## 🧑‍💻 How To Run
 
-1. Install Dependencies
+**1. Install Dependencies**
 
 - `pip install -r requirements.txt`
 
-2. Run Jupyter Notebook
+**2. Run Jupyter Notebook**
 
 - jupyter notebook main.ipynb
 
-3. Ask a Question
+**3. Ask a Question**
 
 - Input your question in the provided interface and get instant answer!
 
