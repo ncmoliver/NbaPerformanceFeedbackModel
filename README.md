@@ -66,10 +66,6 @@ This design ensures faster queries, better organization, and a user-friendly sch
 
 ---
 
-### **Feedback Model Validation**
-
-Most of the questions were tailor to push the model to respond, which is a big inidcation on how much improvement can be made. Validation results were at 70%
-
 ## 💡 How It Works
 
 ### Input:
@@ -142,6 +138,10 @@ project/
 **3. Ask a Question**
 
 - Input your question in the provided interface and get instant answer!
+
+### **Feedback Model Validation**
+
+Most of the questions were tailor to push the model to respond, which is a big inidcation on how much improvement can be made. Validation results were at 70%
 
 ## Future Improvements
 
