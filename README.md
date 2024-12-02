@@ -119,14 +119,14 @@ ORDER BY POINTS DESC LIMIT 1;
 ## 📁 File Structurefold
 
 project/
-├── data/
-│ ├── nba_stats.csv # Original dataset
-│ ├── processed_db.sqlite # Final processed database
-├── scripts/
-│ ├── preprocess.py # Data preprocessing functions
-│ ├── query_model.py # SQL query generation and response logic
-├── main.ipynb # Jupyter notebook for demonstration
-├── README.md # Project README (this file!)
+├── data/  
+│ ├── nba_stats.csv # Original dataset  
+│ ├── processed_db.sqlite # Final processed database  
+├── scripts/  
+│ ├── preprocess.py # Data preprocessing functions  
+│ ├── query_model.py # SQL query generation and response logic  
+├── main.ipynb # Jupyter notebook for demonstration  
+├── README.md # Project README (this file!)  
 └── requirements.txt # Python dependencies
 
 ## 🧑‍💻 How To Run
