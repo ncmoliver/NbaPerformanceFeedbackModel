@@ -145,9 +145,11 @@ project/
 
 ## Future Improvements
 
-- Advanced NLP: Improve question understanding for complex queries
-- Additional data and metrics: Include more advanced basketball statistics to cover all questions a user might ask.
-- Real-Time Data: Integrate live NBA data updates for current season stats.
+| Improvement             | Description                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| Advanced NLP            | Improve question understanding for complex queries                                   |
+| Additional Data/Metrics | Include more advanced basketball statistics to cover all questions a user might ask. |
+| Real-Time Data          | Integrate live NBA data updates for current season stats.ext                         |
 
 ## 🎉 Conclusion
 
