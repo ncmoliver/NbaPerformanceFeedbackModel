@@ -57,6 +57,9 @@ This design ensures faster queries, better organization, and a user-friendly sch
 
 ___
 
+### **Feedback Model Validation**
+Most of the questions were tailor to push the model to respond, which is a big inidcation on how much improvement can be made. Validation results were at 70%
+
 ## 💡 How It Works
 ### **Input:**
 Users ask questions like:
@@ -71,3 +74,4 @@ FROM stats
 JOIN teams ON stats.TEAM_ID = teams.TEAM_ID 
 WHERE TEAM_NAME = 'Los Angeles Lakers' AND YEAR = 2020 
 ORDER BY POINTS DESC LIMIT 1;
+
