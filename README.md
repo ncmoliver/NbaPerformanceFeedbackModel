@@ -159,15 +159,14 @@ Let’s transform basketball together! 🏀💡
 
 ### References
 
-[Marques Oliver]
-[Stacy Staton](https://github.com/stacjstaton)
-[Rygo Foss](https://github.com/emersonfoss)
-[Marquez Ward](https://github.com/mdward911)
+#### Datastet
+
+[NBA STATS Dataset for last 10 years](https://www.kaggle.com/datasets/shivamkumar121215/nba-stats-dataset-for-last-10-years)
+
+#### Contributors
+
+[Marques Oliver]  
+[Stacy Staton](https://github.com/stacjstaton)  
+[Rygo Foss](https://github.com/emersonfoss)  
+[Marquez Ward](https://github.com/mdward911)  
 [Dylan Reed]
-
-- [1991–2021 NBA Stats Dataset](https://www.kaggle.com/datasets)
-- [NBA Stats for the Last 10 Years](https://www.kaggle.com/datasets)
-
-```
-
-```
